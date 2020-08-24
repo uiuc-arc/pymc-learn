@@ -328,14 +328,14 @@ class TestSparseGaussianProcessRegressorPredict(
     def test_predict_returns_predictions(self):
         print('')
         self.advi_sgpr.fit(self.X_train, self.y_train,
-                           inference_args={"n": 25000})
+                           inference_args={"n": 400})
         preds = self.advi_sgpr.predict(self.X_test)
         npt.assert_equal(self.y_test.shape, preds.shape)
 
     def test_predict_returns_mean_predictions_and_std(self):
         print('')
         self.advi_sgpr.fit(self.X_train, self.y_train,
-                           inference_args={"n": 25000})
+                           inference_args={"n": 300})
         preds, stds = self.advi_sgpr.predict(self.X_test, return_std=True)
         npt.assert_equal(self.y_test.shape, preds.shape)
         npt.assert_equal(self.y_test.shape, stds.shape)

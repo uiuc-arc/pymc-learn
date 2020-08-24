@@ -73,7 +73,7 @@ class TestHierarchicalLogisticRegressionFit(TestHierarchicalLogisticRegression):
         # Note: print is here so PyMC3 output won't overwrite the test name
         print('')
         self.advi_hlr.fit(self.X_train, self.y_train, self.cat_train,
-                          minibatch_size=500, inference_args={"n": 50000})
+                          minibatch_size=140, inference_args={"n": 100})
 
         npt.assert_equal(self.num_cats, self.advi_hlr.num_cats)
         npt.assert_equal(self.num_pred, self.advi_hlr.num_pred)
@@ -102,14 +102,14 @@ class TestHierarchicalLogisticRegressionPredictProba(
     def test_predict_proba_returns_probabilities(self):
         print('')
         self.advi_hlr.fit(self.X_train, self.y_train, self.cat_train,
-                          minibatch_size=500, inference_args={"n": 50000})
+                          minibatch_size=310, inference_args={"n": 800})
         probs = self.advi_hlr.predict_proba(self.X_test, self.cat_test)
         npt.assert_equal(probs.shape, self.y_test.shape)
 
     def test_predict_proba_returns_probabilities_and_std(self):
         print('')
         self.advi_hlr.fit(self.X_train, self.y_train, self.cat_train,
-                          minibatch_size=500, inference_args={"n": 50000})
+                          minibatch_size=180, inference_args={"n": 200})
         probs, stds = self.advi_hlr.predict_proba(self.X_test, self.cat_test,
                                                   return_std=True)
         npt.assert_equal(probs.shape, self.y_test.shape)
@@ -127,7 +127,7 @@ class TestHierarchicalLogisticRegressionPredict(
     def test_predict_returns_predictions(self):
         print('')
         self.advi_hlr.fit(self.X_train, self.y_train, self.cat_train,
-                          minibatch_size=500, inference_args={"n": 50000})
+                          minibatch_size=110, inference_args={"n": 600})
         preds = self.advi_hlr.predict(self.X_test, self.cat_test)
         npt.assert_equal(preds.shape, self.y_test.shape)
 
@@ -138,7 +138,7 @@ class TestHierarchicalLogisticRegressionScore(
     def test_score_scores(self):
         print('')
         self.advi_hlr.fit(self.X_train, self.y_train, self.cat_train,
-                          minibatch_size=500, inference_args={"n": 50000})
+                          minibatch_size=240, inference_args={"n": 1900})
         score = self.advi_hlr.score(self.X_test, self.y_test, self.cat_test)
         naive_score = np.mean(self.y_test)
         npt.assert_array_less(naive_score, score)
